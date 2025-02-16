@@ -1,13 +1,17 @@
-import { type Config } from "prettier";
+// prettier.config.js, .prettierrc.js, prettier.config.mjs, or .prettierrc.mjs
 
-const config: Config = {
+/**
+ * @see https://prettier.io/docs/configuration
+ * @type {import("prettier").Config}
+ */
+
+const config = {
   trailingComma: "es5",
   semi: true,
   singleQuote: false,
   printWidth: 120,
   tabWidth: 2,
   jsxSingleQuote: false,
-  jsxBracketSameLine: true,
   bracketSpacing: true,
   arrowParens: "always",
   endOfLine: "lf",

@@ -30,16 +30,21 @@ This is a template project for building React applications with TypeScript. It i
    git clone https://github.com/your-username/react-ts-template.git
    cd react-ts-template
 
+   ```
+
 2. Install dependencies:
 
    ```sh
    bun install
 
+   ```
+
 3. Run the development server:
 
-  ```sh
-  bun dev
+```sh
+bun dev
 
 
 
 
+```

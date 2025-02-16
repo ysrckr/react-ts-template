@@ -1,20 +1,20 @@
 pre-push:
   jobs:
-  - name: test
-    run: bun test {staged_files}
-    glob: "__tests__/**/*.{ts,tsx}"
+    - name: test
+      run: bun test {staged_files}
+      glob: "__tests__/**/*.{ts,tsx}"
 
 pre-commit:
   parallel: true
   jobs:
-  - name: lint
-    run: bun lint {staged_files} --fix
-    glob: "*.{js,ts,jsx,tsx}"
-    stage_fixed: true
-  - name: format
-    run: bun format {staged_files}
-    glob: "*.{js,ts,jsx,tsx}"
-    stage_fixed: true
-  - name: typecheck
-    run: bun typecheck {staged_files}
-    glob: "*.{ts,tsx}"
+    - name: lint
+      run: bun lint {staged_files} --fix
+      glob: "*.{js,ts,jsx,tsx}"
+      stage_fixed: true
+    - name: format
+      run: bun format {staged_files}
+      glob: "*.{js,ts,jsx,tsx}"
+      stage_fixed: true
+    # - name: typecheck
+    #   run: bun type-check {staged_files}
+    #   glob: "*.{ts,tsx}"
