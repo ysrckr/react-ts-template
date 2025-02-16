@@ -4,6 +4,10 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
+[*.{css,scss,html,htm,xml,json,yml,yaml,md}]
+charset = utf-8
+indent_style = space
+
 [*.{js,ts,jsx,tsx}]
 charset = utf-8
 indent_style = space
