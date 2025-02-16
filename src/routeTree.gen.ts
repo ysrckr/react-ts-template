@@ -11,13 +11,14 @@
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
-import { Route as AuthImport } from "./routes/_auth";
+import { Route as LoginImport } from "./routes/login";
 import { Route as IndexImport } from "./routes/index";
 
 // Create/Update Routes
 
-const AuthRoute = AuthImport.update({
-  id: "/_auth",
+const LoginRoute = LoginImport.update({
+  id: "/login",
+  path: "/login",
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -38,11 +39,11 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexImport;
       parentRoute: typeof rootRoute;
     };
-    "/_auth": {
-      id: "/_auth";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof AuthImport;
+    "/login": {
+      id: "/login";
+      path: "/login";
+      fullPath: "/login";
+      preLoaderRoute: typeof LoginImport;
       parentRoute: typeof rootRoute;
     };
   }
@@ -52,37 +53,37 @@ declare module "@tanstack/react-router" {
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
-  "": typeof AuthRoute;
+  "/login": typeof LoginRoute;
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
-  "": typeof AuthRoute;
+  "/login": typeof LoginRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   "/": typeof IndexRoute;
-  "/_auth": typeof AuthRoute;
+  "/login": typeof LoginRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "";
+  fullPaths: "/" | "/login";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "";
-  id: "__root__" | "/" | "/_auth";
+  to: "/" | "/login";
+  id: "__root__" | "/" | "/login";
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
-  AuthRoute: typeof AuthRoute;
+  LoginRoute: typeof LoginRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthRoute: AuthRoute,
+  LoginRoute: LoginRoute,
 };
 
 export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
@@ -94,14 +95,14 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_auth"
+        "/login"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/_auth": {
-      "filePath": "_auth.tsx"
+    "/login": {
+      "filePath": "login.tsx"
     }
   }
 }
