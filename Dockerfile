@@ -1,10 +1,30 @@
-FROM oven/bun:1.2.2-distroless
-ENV NODE_ENV=production
+FROM oven/bun:1.2.2-distroless AS base
 WORKDIR /usr/src/app
-COPY ["package.json", "bun.lock", "./"]
-RUN bun i --production --silent && mv node_modules ../
+
+FROM base AS build
+RUN mkdir -p /temp/dev
+COPY package.json bun.lock /temp/dev/
+RUN cd /temp/dev && bun install --frozen-lockfile
+
+RUN mkdir -p /temp/prod
+COPY package.json bun.lock /temp/prod/
+RUN cd /temp/prod && bun install --frozen-lockfile --production
+
+FROM base AS prerelease
+COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
-EXPOSE 3000
-RUN chown -R node /usr/src/app
-USER node
-CMD ["bun", "start"]
+
+ENV NODE_ENV=production
+RUN bun test
+RUN bun run build
+
+FROM base AS release
+COPY --from=install /temp/prod/node_modules node_modules
+COPY --from=prerelease /usr/src/app/dist dist
+COPY --from=prerelease /usr/src/app/package.json .
+
+USER bun
+EXPOSE 3000/tcp
+CMD ["bun", "run", "start"]
+
+
