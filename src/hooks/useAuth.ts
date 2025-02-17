@@ -1,4 +1,4 @@
-import { authStore } from "@store/authStore";
+import { authStore } from "@store/auth";
 import { useSnapshot } from "valtio";
 
 export const useAuth = () => {

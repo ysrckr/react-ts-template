@@ -1,6 +1,6 @@
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 
-import { Auth } from "../types/auth";
+import { Auth } from "@/types/auth";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";

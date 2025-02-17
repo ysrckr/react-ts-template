@@ -1,4 +1,5 @@
-import { AuthState } from "../types/auth";
+import { AuthState } from "@/types/auth";
+import { newDevtool } from "./devtool";
 import { proxy } from "valtio";
 
 const authState: AuthState = {
@@ -7,3 +8,5 @@ const authState: AuthState = {
 };
 
 export const authStore = proxy(authState);
+
+newDevtool(authStore, "Auth Store");
