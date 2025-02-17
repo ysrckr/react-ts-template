@@ -1,14 +1,15 @@
 import "./index.css";
 
-import { ErrorComponent, ErrorComponentProps, RouterProvider, createRouter } from "@tanstack/react-router";
+import { ErrorComponent, ErrorComponentProps, createRouter } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import App from "./App";
 import { createRoot } from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 
 export const queryClient = new QueryClient();
 
-const router = createRouter({
+export const router = createRouter({
   routeTree,
   defaultPendingComponent: () => <div>loading...</div>,
   defaultErrorComponent: ({ error }: ErrorComponentProps) => <ErrorComponent error={error} />,
@@ -34,13 +35,7 @@ if (!rootElement.innerHTML) {
 
   root.render(
     <QueryClientProvider client={queryClient}>
-      <RouterProvider
-        router={router}
-        defaultPreload="intent"
-        context={{
-          auth: undefined!,
-        }}
-      />
+      <App />
     </QueryClientProvider>
   );
 }

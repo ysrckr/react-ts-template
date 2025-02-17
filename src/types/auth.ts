@@ -1,9 +1,11 @@
 export type AuthStatus = "logged-out" | "logged-in";
 
-export type Auth = {
+export type AuthState = {
+  userId?: string;
   status: AuthStatus;
-  login: () => void;
-  logout: () => void;
-  getStatus: () => AuthStatus;
-  isLoggedIn: () => boolean;
+};
+
+export type Auth = {
+  auth: AuthState;
+  isAuthenticated: () => boolean;
 };
